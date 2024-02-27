@@ -1,0 +1,23 @@
+// Specific CSS for your home-page
+.homebanner {
+  background-image: url('./homepage.jpg');
+  height: 50vh;
+  background-size: cover;
+  background-position-y: 45%;
+}
+
+.list-card {
+  background-size: cover;
+  background-position: center;
+  height: 35vh;
+  width: 20vw;
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+}

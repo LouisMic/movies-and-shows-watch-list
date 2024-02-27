@@ -1,0 +1,26 @@
+.list-image {
+  background-image: url('./homepage.jpg');
+  height: 50vh;
+  background-size: cover;
+  background-position-y: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  color: white;
+  font-size: xx-large;
+}
+
+.card {
+  height: max-content;
+  width: 35vw;
+
+  img {
+    height: 20vh;
+    width: fit-content;
+  }
+
+  p {
+    font-size: 0.7rem;
+  }
+}
