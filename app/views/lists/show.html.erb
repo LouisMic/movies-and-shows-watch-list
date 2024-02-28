@@ -1,15 +1,14 @@
-<div class="list-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= @list.image_url %>)"><%= @list.name %></div>
-<div class="container pt-3">
-  <div class="cards d-grid">
-    <% @list.movies.each do |movie| %>
-      <div class="card mb-3">
-      <img src="<%= movie.poster_url %>" class="card-img-top" alt="">
-      <div class="card-body">
-        <h5 class="card-title"><%= movie.title %> (<%= movie.year %>) - <%= movie.rating %>⭐</h5>
-        <p class="card-text"><%= movie.description %></p>
-        <p class="card-text"><small class="text-muted"><%= @list.bookmark_comment(movie.id) %></small></p>
-      </div>
-    </div>
+<div class="list-image d-flex flex-column" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= @list.image_url %>)">
+  <%= @list.name %>
+  <div class="col-sm-8 my-3">
+    <%= form_with url: new_list_bookmark_path(@list), method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Search a movie"
+        %>
+      <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
+<%= render "shared/movie_grid", list: @list, movies: @list.movies %>

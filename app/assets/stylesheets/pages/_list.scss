@@ -16,11 +16,21 @@
   width: 35vw;
 
   img {
-    height: 20vh;
+    height: fit-content;
+    max-height: 283px;
+    max-width: 35vw;
     width: fit-content;
+    align-self: center;
   }
 
   p {
     font-size: 0.7rem;
   }
+}
+
+.cards {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px
 }

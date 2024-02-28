@@ -1,0 +1,40 @@
+<div class="container pt-3">
+  <div class="cards">
+    <% movies.each do |movie| %>
+      <div class="card mb-3">
+      <img src="<%= movie.poster_url %>" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title"><%= movie.title || movie["title"] %> (<%= movie.year %>) - <%= movie.rating || movie["vote_average"] %> ⭐</h5>
+        <p class="card-text"><%= movie.description  || movie["overview"]  %></p>
+        <div class="card-text d-flex justify-content-between" data-controller="bookmark">
+          <div class="bookmark d-flex">
+            <i class="fa-solid fa-quote-left"></i>
+            <% if list.bookmark(movie.id) %>
+              <small class="text-muted"><%= list.bookmark_comment(movie.id) %></small>
+            <% else %>
+              <%= form_with url: list_bookmarks_path(list, :movie => movie.attributes), method: :post, class: "ps-2 d-none d-flex", data: { bookmark_target: "form"} do %>
+                <%= text_field_tag :comment,
+                      params[:comment],
+                      class: "form-control form-control-sm",
+                      placeholder: "Add a comment here" %>
+                <%= submit_tag "Add comment",
+                  class: "btn btn-primary btn-sm" %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="append_list">
+            <% unless list.movies.include?(movie) %>
+              <div data-action="click->bookmark#toggle"><%= "Add to #{list.name}" %></div>
+            <% else %>
+              <%= link_to "Delete movie from list",
+                  list_movie_bookmark_path(list, movie, Bookmark.find_by(list_id: list.id, movie_id: movie.id)),
+                  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},
+                  class: "text-danger" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

@@ -8,7 +8,11 @@ class List < ApplicationRecord
     self.bookmarks.map { |bookmark| bookmark.movie}
   end
 
+  def bookmark(id)
+    Bookmark.find_by(list: self, movie_id: id)
+  end
+
   def bookmark_comment(id)
-    Bookmark.where(list: self, movie_id: id)[0].comment
+    Bookmark.find_by(list: self, movie_id: id).comment
   end
 end
